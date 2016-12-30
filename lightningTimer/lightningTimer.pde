@@ -13,13 +13,14 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PFont f16;
+PFont f24;
 PFont f32;
+PFont f48;
 PFont f64;
 PFont f128;
 PFont f200;
 PFont f96;
 Table table;
-String section = "A";
 int offset = 0;
 int startTime = (60*60*hour()) + (60*minute()) + second();
 
@@ -31,9 +32,11 @@ void setup() {
   f96 = createFont("Arial", 96, true); 
   f200 = createFont("Arial", 200, true);
   f64 = createFont("Arial", 64, true); 
+  f48 = createFont("Arial", 48, true);
   f32 = createFont("Arial", 32, true); 
+  f24 = createFont("Arial", 24, true);
   f16 = createFont("Arial", 16, true); 
-  table = loadTable("test.tsv", "header, tsv");
+  table = loadTable("Session1.tsv", "header, tsv");
  // table = loadTable("http://www.weebly.com/uploads/3/1/9/3/31930665/ssblightning.tsv", "header, tsv");
  // table = loadTable("LightningTalksSchedule2014.csv", "header, csv");
 }
@@ -83,6 +86,10 @@ void draw() {
       textFont(f64);       
       //text(str(rowTime)+"  "+str(minutesLeft)+"  "+str(minutesElapsed), width/2, 4*height/5);
       text("Now: " + row.getString("Presenter") +  " " + row.getString("Time") , width/2, 2*height/5);
+      if ( minutesLeft > 2 ){
+        textFont(f48);
+        text(row.getString("Title"), 0.5*width/4, 2.5*height/5, 3*width/4, 3.5*height/5);
+      }
     }
     if ( (minutesLeft < 3) && ((minutesElapsed+5) < (rowTime+5)) && ((minutesElapsed+5) >= rowTime) ) {
       textFont(f64);       
